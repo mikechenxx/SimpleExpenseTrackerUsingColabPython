@@ -1,0 +1,59 @@
+import·numpy·as·np
+import·pandas·as·pd
+from·datetime·import·date
+GOODS_OR_SERVICES = []
+PRICES = []
+DATES = []
+EXPENSE_TYPES = []
+def add_expense(good_or_service, price, date, expense_type):
+GOODS_OR_SERVICES.append(good_or_service)
+PRICES.append(price)
+DATES.append(date)
+EXPENSE_TYPES.append(expense_type)
+#main prgm
+option = -1 #this is users option or choice or input
+while (option != 0):
+#create option menu
+print('welcome to expense tracker:')
+print('1. add food expense')
+print('2. add household expense')
+print('3. add transportation expense')
+print('4. show and save the expense report')
+print('0. exit')
+option = int(input('choose an option:\n'))
+#print new line
+print()
+#check for users choice or option or input
+if option == 0:
+print('exiting the program')
+break
+elif option == 1:
+print('adding food')
+expense_type = 'FOOD'
+elif option == 2:
+print('adding household')
+expense_type= 'HOUSEHOLD'
+elif option == 3:
+print('adding transportation')
+expense_type = 'TRANSPORTATION'
+elif option == 4:
+#create data frame and add the expenses to show and save report
+expense_report = pd.DataFrame()
+expense_report['GOODS_OR_SERVICES'] = GOODS_OR_SERVICES
+expense_report['PRICES'] = PRICES
+expense_report['DATES'] = DATES
+expense_report['EXPENSE_TYPES'] = EXPENSE_TYPES
+#save expense report
+expense_report.to_csv('expenses.csv')
+#show expense report
+print(expense_report)
+else:
+print('you chose an incorrect option. please choose 0,1,2,3 or 4')
+#allow user to enter the good or sevice and the price
+if option == 1 or option == 2 or option == 3:
+good_or_service = input('enter the good or service for the expense type '+expense_type+':\n')
+price = float(input('enter the price of the good or service:\n'))
+today = date.today()
+add_expense(good_or_service, price, today, expense_type)
+#print new line
+print()
